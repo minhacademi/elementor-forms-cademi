@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Elementor Pro Forms Cademí\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-05 22:04+0000\n"
+"PO-Revision-Date: 2024-02-05 22:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: Português do Brasil\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.6; wp-6.3\n"
+"X-Domain: elementor-forms-cademi"
+
+#. Description of the plugin
+msgid "Add Cademí after submit actions to Elementor Forms"
+msgstr "Adiciona ações de pós envio para os Formulários do Elementor"
+
+#. Author of the plugin
+msgid "Cademí"
+msgstr "Cademí"
+
+#: form-actions/redirect.php:214
+#, php-format
+msgid "Cademí Redirect :: \"%s\" not defined"
+msgstr "Cademí Redirect :: \"%s\" não definido"
+
+#: form-actions/redirect.php:58
+msgid "Delivery ID (optional)"
+msgstr "ID de Entrega (opcional)"
+
+#. Name of the plugin
+msgid "Elementor Pro Forms Cademí"
+msgstr "Elementor Pro Forms Cademí"
+
+#: form-actions/redirect.php:97
+msgid "Email's field id"
+msgstr "ID do campo Email"
+
+#. Author URI of the plugin
+msgid "https://cademi.com.br"
+msgstr "https://cademi.com.br"
+
+#: form-actions/redirect.php:71
+msgid "Internal Redirect (optional)"
+msgstr "Redirect Interno (opcional)"
+
+#: form-actions/redirect.php:84
+msgid "Name's field id"
+msgstr "ID do campo Nome"
+
+#: form-actions/redirect.php:110
+msgid "Phone's field id"
+msgstr "ID do campo Celular"
+
+#: form-actions/redirect.php:42
+msgid "Platform Token"
+msgstr "Token da plataforma"
+
+#: form-actions/redirect.php:31
+msgid "Platform URL"
+msgstr "URL da plataforma"
+
+#: form-actions/redirect.php:52
+msgid "Show advanced settings"
+msgstr "Mostrar avançado"
+
+#: form-actions/redirect.php:72
+msgid ""
+"When setting a Internal Redirect, the user will be redirect to this URL "
+"after login"
+msgstr ""
+"Ao configurar um Redirect Interno, o usuário será redirecionado para esta "
+"URL após o login."
+
+#: form-actions/redirect.php:59
+msgid ""
+"When setting an ID, you will add the Delivery for the user, in addition to "
+"the configured free delivery"
+msgstr ""
+"Ao definir uma ID você irá adicionará a Entrega para o usuário, além da "
+"entrega gratuita configurada."
+
+#: form-actions/redirect.php:43
+msgid "You can find your Platform Token on: Settings > Platform Token"
+msgstr ""
+"Você pode encontrar o Token da sua plataforma em: Configurações > Token da "
+"Plataforma"
+
+#: form-actions/redirect.php:32
+msgid "You can find your Platform URL on: Settings > Default Domain"
+msgstr ""
+"Você pode encontrar a URL da sua plataforma em: Configurações > Domínio "
+"padrão"
