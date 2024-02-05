@@ -1,5 +1,4 @@
 # Elementor Forms Cademí
-___
 
 Plugin da Cademí desenvolvido para adicionar ações de pós envio de formulários nativos do Elementor PRO
 
@@ -13,11 +12,14 @@ Nossa versão beta ainda não foi disponibilizada no repositório oficial do Wor
    * Adicionar novo;
    * Fazer upload;
    * Selecione o .zip que você baixou;
-3. Após instalar, a ação "Redirect - Cademí" irá aparecer nas opções de configuração dos formulários dentro do Elementor.
+3. Após instalar a ação "Redirect - Cademí" irá aparecer nas opções de configuração dos formulários dentro do Elementor.
 
 ___
 
 ### Como usar?
+
+> Lembre-se de manter essa ação como a última da sua lista de ações pois ela irá redirecionar o usuário e não executará outras ações.
+
 Após selecionar a ação, uma caixa irá surgir na barra lateral com o título "Redirect - Cademí" com os campos:
 
 | Campo               | Obrigatório | Descrição                                                                                            | 
@@ -30,4 +32,3 @@ Após selecionar a ação, uma caixa irá surgir na barra lateral com o título 
 | ID do campo Email   | -           | ID do campo Email do aluno, você encontra esse ID ao editar o campo na aba "Avançado"                |
 | ID do campo Celular | -           | ID do campo Celular do aluno, você encontra esse ID ao editar o campo na aba "Avançado"              |
 
-> Lembre-se de manter essa ação como a última da sua lista de ações pois ela irá redirecionar o usuário para a Cademí
