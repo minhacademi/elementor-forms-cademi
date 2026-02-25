@@ -62,6 +62,12 @@ if (! function_exists('__')) {
     }
 }
 
+if (! function_exists('wp_kses_post')) {
+    function wp_kses_post($data) {
+        return $data;
+    }
+}
+
 /*
 |--------------------------------------------------------------------------
 | Stub Elementor classes

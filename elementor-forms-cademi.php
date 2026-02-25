@@ -1,5 +1,9 @@
 <?php
 /**
+ * Elementor Forms Cademi
+ *
+ * @package Elementor_Forms_Cademi
+ *
  * Plugin Name:       Elementor Forms Cademi
  * Plugin URI:        https://github.com/minhacademi/elementor-forms-cademi
  * Description:       Add Cademi after-submit actions to Elementor Pro Forms.
@@ -52,7 +56,7 @@ function elementor_forms_cademi_admin_notice_missing_pro() {
 		'<strong>Elementor Pro</strong>'
 	);
 
-	printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
+	echo wp_kses_post( '<div class="notice notice-warning is-dismissible"><p>' . $message . '</p></div>' );
 }
 
 /**
