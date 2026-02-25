@@ -15,6 +15,12 @@
         "wp-coding-standards/wpcs": "^3.3",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.2"
     },
+    "scripts": {
+        "test": "pest",
+        "lint": "phpcs --standard=WordPress --extensions=php --ignore=vendor/,tests/ elementor-forms-cademi.php form-actions/",
+        "lint:security": "phpcs --standard=WordPress --sniffs=WordPress.Security.EscapeOutput,WordPress.WP.EnqueuedResources,WordPress.DB.PreparedSQL,WordPress.PHP.DevelopmentFunctions --extensions=php elementor-forms-cademi.php form-actions/",
+        "lint:fix": "phpcbf --standard=WordPress --extensions=php --ignore=vendor/,tests/ elementor-forms-cademi.php form-actions/"
+    },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true,
