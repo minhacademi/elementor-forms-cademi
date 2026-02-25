@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Elementor Forms Cademi\n"
+"Project-Id-Version: Cademi for Elementor Forms\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-25 00:00+0000\n"
 "PO-Revision-Date: 2026-02-25 00:00+0000\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.6.6; wp-6.3\n"
-"X-Domain: elementor-forms-cademi"
+"X-Domain: cademi-for-elementor-forms"
 
 #. Description of the plugin
 msgid "Add Cademi after-submit actions to Elementor Pro Forms."

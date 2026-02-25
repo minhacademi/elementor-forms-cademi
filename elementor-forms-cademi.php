@@ -12,10 +12,10 @@
  * Author URI:        https://cademi.com.br
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       elementor-forms-cademi
+ * Text Domain:       cademi-for-elementor-forms
  * Domain Path:       /languages
  * Requires at least: 6.2
- * Tested up to:      6.7
+ * Tested up to:      6.9
  * Requires PHP:      7.4
  * Stable tag:        1.0.0
  * Requires Plugins:  elementor
@@ -30,18 +30,6 @@ define( 'ELEMENTOR_FORMS_CADEMI_FILE', __FILE__ );
 define( 'ELEMENTOR_FORMS_CADEMI_DIR', plugin_dir_path( __FILE__ ) );
 
 /**
- * Load plugin textdomain for translations.
- */
-function elementor_forms_cademi_load_textdomain() {
-	load_plugin_textdomain(
-		'elementor-forms-cademi',
-		false,
-		dirname( plugin_basename( ELEMENTOR_FORMS_CADEMI_FILE ) ) . '/languages/'
-	);
-}
-add_action( 'init', 'elementor_forms_cademi_load_textdomain' );
-
-/**
  * Show admin notice when Elementor Pro is not active.
  */
 function elementor_forms_cademi_admin_notice_missing_pro() {
@@ -51,7 +39,7 @@ function elementor_forms_cademi_admin_notice_missing_pro() {
 
 	$message = sprintf(
 		/* translators: 1: Plugin name, 2: Elementor Pro */
-		esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'elementor-forms-cademi' ),
+		esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'cademi-for-elementor-forms' ),
 		'<strong>Cademi for Elementor Forms</strong>',
 		'<strong>Elementor Pro</strong>'
 	);
