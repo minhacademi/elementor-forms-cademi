@@ -1,7 +1,11 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use Elementor\Controls_Manager;
-use \ElementorPro\Modules\Forms\Classes\Action_Base;
+use ElementorPro\Modules\Forms\Classes\Action_Base;
 
 class Cademi_Action_After_Submit extends Action_Base
 {
@@ -9,24 +13,24 @@ class Cademi_Action_After_Submit extends Action_Base
 	{
 		return 'cademi_redirect';
 	}
-	
+
 	public function get_label()
 	{
-		return 'Redirect - Cademí';
+		return 'Redirect - Cademi';
 	}
-	
+
 	public function register_settings_section( $widget )
 	{
 		$widget->start_controls_section(
 			'cademi',
 			[
-				'label' => 'Redirect - Cademí',
+				'label' => 'Redirect - Cademi',
 				'condition' => [
 					'submit_actions' => $this->get_name(),
 				],
 			]
 		);
-		
+
 		$widget->add_control('cademi_url', [
 			'label'         => esc_html__('Platform URL', 'elementor-forms-cademi'),
 			'description'   => esc_html__('You can find your Platform URL on: Settings > Default Domain', 'elementor-forms-cademi'),
@@ -37,7 +41,7 @@ class Cademi_Action_After_Submit extends Action_Base
 				'active' => false,
 			]
 		]);
-		
+
 		$widget->add_control('cademi_token', [
 			'label'         => esc_html__('Platform Token', 'elementor-forms-cademi'),
 			'description'   => esc_html__('You can find your Platform Token on: Settings > Platform Token', 'elementor-forms-cademi'),
@@ -47,13 +51,13 @@ class Cademi_Action_After_Submit extends Action_Base
 				'active' => false,
 			]
 		]);
-		
+
 		$widget->add_control('cademi_show_advanced', [
 			'label' => esc_html__( 'Show advanced settings', 'elementor-forms-cademi'),
 			'type' => Controls_Manager::SWITCHER,
 			'default' => 'yes',
 		]);
-		
+
 		$widget->add_control('cademi_entrega_id', [
 			'label'         => esc_html__('Delivery ID (optional)', 'elementor-forms-cademi'),
 			'description'   => esc_html__('When setting an ID, you will add the Delivery for the user, in addition to the configured free delivery', 'elementor-forms-cademi'),
@@ -66,7 +70,7 @@ class Cademi_Action_After_Submit extends Action_Base
 				'cademi_show_advanced' => 'yes',
 			]
 		]);
-		
+
 		$widget->add_control('cademi_destino_url', [
 			'label'         => esc_html__('Internal Redirect (optional)', 'elementor-forms-cademi'),
 			'description'   => esc_html__('When setting a Internal Redirect, the user will be redirect to this URL after login', 'elementor-forms-cademi'),
@@ -79,7 +83,7 @@ class Cademi_Action_After_Submit extends Action_Base
 				'cademi_show_advanced' => 'yes',
 			]
 		]);
-		
+
 		$widget->add_control('cademi_campo_nome', [
 			'label'         => esc_html__('Name\'s field id', 'elementor-forms-cademi'),
 			'label_block'   => false,
@@ -92,7 +96,7 @@ class Cademi_Action_After_Submit extends Action_Base
 				'cademi_show_advanced' => 'yes',
 			]
 		]);
-		
+
 		$widget->add_control('cademi_campo_email', [
 			'label'         => esc_html__('Email\'s field id', 'elementor-forms-cademi'),
 			'label_block'   => false,
@@ -105,7 +109,7 @@ class Cademi_Action_After_Submit extends Action_Base
 				'cademi_show_advanced' => 'yes',
 			]
 		]);
-		
+
 		$widget->add_control('cademi_campo_celular', [
 			'label'         => esc_html__('Phone\'s field id', 'elementor-forms-cademi'),
 			'label_block'   => false,
@@ -118,11 +122,10 @@ class Cademi_Action_After_Submit extends Action_Base
 				'cademi_show_advanced' => 'yes',
 			]
 		]);
-		
+
 		$widget->end_controls_section();
-		
 	}
-	
+
 	public function on_export( $element )
 	{
 		unset(
@@ -130,107 +133,127 @@ class Cademi_Action_After_Submit extends Action_Base
 		);
 		return $element;
 	}
-	
+
+	/**
+	 * Safely retrieve a form setting value.
+	 *
+	 * @param \ElementorPro\Modules\Forms\Classes\Form_Record $record
+	 * @param string $key
+	 * @return string
+	 */
+	private function get_form_setting( $record, $key )
+	{
+		$settings = $record->get( 'form_settings' );
+		return isset( $settings[ $key ] ) ? trim( (string) $settings[ $key ] ) : '';
+	}
+
+	/**
+	 * Safely retrieve a submitted field value by its configured field ID setting.
+	 *
+	 * @param \ElementorPro\Modules\Forms\Classes\Form_Record $record
+	 * @param string $setting_key The form setting that holds the field ID.
+	 * @return string
+	 */
+	private function get_field_value( $record, $setting_key )
+	{
+		$field_id = $this->get_form_setting( $record, $setting_key );
+		if ( '' === $field_id ) {
+			return '';
+		}
+		$fields = $record->get( 'fields' );
+		return isset( $fields[ $field_id ]['value'] ) ? trim( (string) $fields[ $field_id ]['value'] ) : '';
+	}
+
 	public function run( $record, $ajax_handler )
 	{
-		// Pegando parâmetros
-		$params = [
-			"url" => function($record)
-			{
-				$value = @$record->get("form_settings")['cademi_url'];
-				$value = @trim($value);
-				if(empty($value))
-					return '';
+		// Retrieve and sanitize form settings.
+		$raw_url = $this->get_form_setting( $record, 'cademi_url' );
+		$token   = sanitize_text_field( $this->get_form_setting( $record, 'cademi_token' ) );
 
-				if(strpos($value, "://") === false)
-					$value = "https://" . $value;
-
-				$value = strtolower($value);
-				$value = parse_url($value);
-				$value = $value['scheme'] . '://' . $value['host'];
-				return $value;
-			},
-			"token" => function($record)
-			{
-				$value = @$record->get("form_settings")['cademi_token'];
-				$value = @trim($value);
-				return $value;
-			},
-			"entrega_id" => function($record)
-			{
-				$value = @$record->get("form_settings")['cademi_entrega_id'];
-				$value = preg_replace('/\D/', '', $value);
-				return $value;
-			},
-			"redirect" => function($record)
-			{
-				$value = @$record->get("form_settings")['cademi_destino_url'];
-				$value = @trim($value);
-				if(empty($value))
-					return '';
-
-				// Sempre transformar em path relativo, removendo domínio/protocolo se houver
-				if(strpos($value, "://") !== false) {
-					$parsed = parse_url($value);
-					$value = isset($parsed['path']) ? $parsed['path'] : '/';
-				}
-
-				// Remover protocolo sem :// (ex: "https:path")
-				$value = preg_replace('#^[a-zA-Z]+:#', '', $value);
-
-				// Remover barras duplicadas iniciais e garantir que comece com /
-				$value = '/' . ltrim($value, '/');
-
-				return $value;
-			},
-			"nome" => function($record)
-			{
-				$field_id = @$record->get('form_settings')['cademi_campo_nome'];
-				$field_id = @trim($field_id);
-				$value = @$record->get("fields")[$field_id]['value'];
-				$value = @trim($value);
-				return $value;
-			},
-			"email" => function($record)
-			{
-				$field_id = @$record->get('form_settings')['cademi_campo_email'];
-				$field_id = @trim($field_id);
-				$value = @$record->get("fields")[$field_id]['value'];
-				$value = @trim($value);
-				return $value;
-			},
-			"celular" => function($record)
-			{
-				$field_id = @$record->get('form_settings')['cademi_campo_celular'];
-				$field_id = @trim($field_id);
-				$value = @$record->get("fields")[$field_id]['value'];
-				$value = @trim($value);
-				return $value;
+		// Build the platform base URL.
+		$platform_url = '';
+		if ( '' !== $raw_url ) {
+			if ( strpos( $raw_url, '://' ) === false ) {
+				$raw_url = 'https://' . $raw_url;
 			}
-		];
-		foreach($params as $key => $func)
-			$params[$key] = $func($record);
-		
-		// Filtrando e validando parâmetros obrigatórios
-		$params = array_filter($params);
-		foreach(["url","token","email"] as $key){
-			
-			if (isset($params[$key])) continue;
-			
-			$ajax_handler->add_error_message(sprintf(
-				esc_html__('Cademí Redirect :: "%s" not defined', 'elementor-forms-cademi'),
-				$key
-			));
-			
+			$raw_url = strtolower( $raw_url );
+			$parsed  = wp_parse_url( $raw_url );
+			if ( ! empty( $parsed['scheme'] ) && ! empty( $parsed['host'] ) ) {
+				$platform_url = $parsed['scheme'] . '://' . $parsed['host'];
+			}
+		}
+
+		// Delivery ID: numeric only.
+		$entrega_id = preg_replace( '/\D/', '', $this->get_form_setting( $record, 'cademi_entrega_id' ) );
+
+		// Internal redirect path — always relative.
+		$redirect = $this->get_form_setting( $record, 'cademi_destino_url' );
+		if ( '' !== $redirect ) {
+			if ( strpos( $redirect, '://' ) !== false ) {
+				$parsed   = wp_parse_url( $redirect );
+				$redirect = isset( $parsed['path'] ) ? $parsed['path'] : '/';
+			}
+			$redirect = preg_replace( '#^[a-zA-Z]+:#', '', $redirect );
+			$redirect = '/' . ltrim( $redirect, '/' );
+			$redirect = sanitize_text_field( $redirect );
+		}
+
+		// Form field values.
+		$nome    = sanitize_text_field( $this->get_field_value( $record, 'cademi_campo_nome' ) );
+		$email   = sanitize_email( $this->get_field_value( $record, 'cademi_campo_email' ) );
+		$celular = sanitize_text_field( $this->get_field_value( $record, 'cademi_campo_celular' ) );
+
+		// Validate email.
+		if ( '' !== $email && ! is_email( $email ) ) {
+			$ajax_handler->add_error_message(
+				esc_html__( 'Cademi Redirect :: Invalid email address', 'elementor-forms-cademi' )
+			);
 			return;
 		}
 
-		// Montando URL
-		$url = $params['url'];
-		unset($params['url']);
-		$url = sprintf("%s/auth/cadastrar_via_url?%s",$url,http_build_query($params));
-		
-		// Devolvendo redirecionamento
-		$ajax_handler->add_response_data( 'redirect_url', $url);
+		// Validate required fields.
+		$required = [
+			'url'   => $platform_url,
+			'token' => $token,
+			'email' => $email,
+		];
+		foreach ( $required as $key => $value ) {
+			if ( empty( $value ) ) {
+				$ajax_handler->add_error_message(
+					sprintf(
+						/* translators: %s: field name (url, token, or email) */
+						esc_html__( 'Cademi Redirect :: "%s" not defined', 'elementor-forms-cademi' ),
+						$key
+					)
+				);
+				return;
+			}
+		}
+
+		// Build query parameters.
+		$query_params = [
+			'token' => $token,
+			'email' => $email,
+		];
+		if ( '' !== $nome ) {
+			$query_params['nome'] = $nome;
+		}
+		if ( '' !== $celular ) {
+			$query_params['celular'] = $celular;
+		}
+		if ( '' !== $entrega_id ) {
+			$query_params['entrega_id'] = $entrega_id;
+		}
+		if ( '' !== $redirect ) {
+			$query_params['redirect'] = $redirect;
+		}
+
+		$url = sprintf(
+			'%s/auth/cadastrar_via_url?%s',
+			$platform_url,
+			http_build_query( $query_params )
+		);
+
+		$ajax_handler->add_response_data( 'redirect_url', esc_url_raw( $url ) );
 	}
 }

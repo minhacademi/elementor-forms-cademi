@@ -1,0 +1,21 @@
+{
+    "name": "cademi/elementor-forms-cademi",
+    "description": "Add Cademi after-submit actions to Elementor Pro Forms",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Renan",
+            "email": "renan@cademi.com.br"
+        }
+    ],
+    "require-dev": {
+        "pestphp/pest": "^4.4",
+        "brain/monkey": "^2.7"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
