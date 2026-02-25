@@ -169,12 +169,18 @@ class Cademi_Action_After_Submit extends Action_Base
 				if(empty($value))
 					return '';
 
-				if(strpos($value, "://") === false)
-					$value = "https://" . $value;
+				// Sempre transformar em path relativo, removendo domínio/protocolo se houver
+				if(strpos($value, "://") !== false) {
+					$parsed = parse_url($value);
+					$value = isset($parsed['path']) ? $parsed['path'] : '/';
+				}
 
-				$value = strtolower(trim($value));
-				$value = parse_url($value);
-				$value = $value['path'];
+				// Remover protocolo sem :// (ex: "https:path")
+				$value = preg_replace('#^[a-zA-Z]+:#', '', $value);
+
+				// Remover barras duplicadas iniciais e garantir que comece com /
+				$value = '/' . ltrim($value, '/');
+
 				return $value;
 			},
 			"nome" => function($record)
