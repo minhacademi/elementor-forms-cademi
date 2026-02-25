@@ -5,7 +5,7 @@
  * @package Cademi_For_Elementor_Forms
  *
  * Plugin Name:       Cademi for Elementor Forms
- * Plugin URI:        https://github.com/minhacademi/elementor-forms-cademi
+ * Plugin URI:        https://github.com/minhacademi/cademi-for-elementor-forms
  * Description:       Add Cademi after-submit actions to Elementor Pro Forms.
  * Version:           1.0.0
  * Author:            Cademi
