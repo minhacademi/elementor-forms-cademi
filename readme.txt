@@ -1,4 +1,4 @@
-=== Elementor Forms Cademi ===
+=== Cademi for Elementor Forms ===
 Contributors: cademi
 Tags: elementor, forms, cademi, redirect, lms
 Requires at least: 6.2
@@ -12,7 +12,7 @@ Add Cademi after-submit actions to Elementor Pro Forms.
 
 == Description ==
 
-Elementor Forms Cademi adds a **Redirect - Cademi** action to the Elementor Pro form widget's after-submit actions. When a visitor submits a form, they are automatically registered on your Cademi platform and redirected to it.
+Cademi for Elementor Forms adds a **Redirect - Cademi** action to the Elementor Pro form widget's after-submit actions. When a visitor submits a form, they are automatically registered on your Cademi platform and redirected to it.
 
 **Features:**
 

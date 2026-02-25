@@ -1,10 +1,10 @@
 <?php
 /**
- * Elementor Forms Cademi
+ * Cademi for Elementor Forms
  *
- * @package Elementor_Forms_Cademi
+ * @package Cademi_For_Elementor_Forms
  *
- * Plugin Name:       Elementor Forms Cademi
+ * Plugin Name:       Cademi for Elementor Forms
  * Plugin URI:        https://github.com/minhacademi/elementor-forms-cademi
  * Description:       Add Cademi after-submit actions to Elementor Pro Forms.
  * Version:           1.0.0
@@ -52,7 +52,7 @@ function elementor_forms_cademi_admin_notice_missing_pro() {
 	$message = sprintf(
 		/* translators: 1: Plugin name, 2: Elementor Pro */
 		esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'elementor-forms-cademi' ),
-		'<strong>Elementor Forms Cademi</strong>',
+		'<strong>Cademi for Elementor Forms</strong>',
 		'<strong>Elementor Pro</strong>'
 	);
 

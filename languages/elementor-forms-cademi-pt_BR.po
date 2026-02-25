@@ -41,8 +41,8 @@ msgid "Delivery ID (optional)"
 msgstr "ID de Entrega (opcional)"
 
 #. Name of the plugin
-msgid "Elementor Forms Cademi"
-msgstr "Elementor Forms Cademi"
+msgid "Cademi for Elementor Forms"
+msgstr "Cademi for Elementor Forms"
 
 #: form-actions/redirect.php
 msgid "Email's field id"
